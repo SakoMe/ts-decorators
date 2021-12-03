@@ -9,8 +9,9 @@ function controller(routePrefix) {
         for (const key of Object.getOwnPropertyNames(target.prototype)) {
             const routeHandler = target.prototype[key];
             const path = Reflect.getMetadata('path', target.prototype, key);
+            const method = Reflect.getMetadata('method', target.prototype, key);
             if (path) {
-                router.get(`${routePrefix}${path}`, routeHandler);
+                router[method](`${routePrefix}${path}`, routeHandler);
             }
         }
     };
