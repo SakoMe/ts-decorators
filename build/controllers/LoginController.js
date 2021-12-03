@@ -9,8 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const routes_1 = require("./decorators/routes");
-const controllers_1 = require("./decorators/controllers");
+const decorators_1 = require("./decorators");
 let LoginController = class LoginController {
     getLogin(_request, response) {
         response.send(`
@@ -30,11 +29,11 @@ let LoginController = class LoginController {
     }
 };
 __decorate([
-    (0, routes_1.get)('/login'),
+    (0, decorators_1.get)('/login'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "getLogin", null);
 LoginController = __decorate([
-    (0, controllers_1.controller)('/auth')
+    (0, decorators_1.controller)('/auth')
 ], LoginController);
