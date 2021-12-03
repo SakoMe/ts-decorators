@@ -37,23 +37,6 @@ router.get('/', (request: Request, response: Response): void => {
 	}
 });
 
-router.get('/login', (_request: Request, response: Response): void => {
-	response.send(`
-    <form method="POST">
-      <div>
-        <label>Email</label>
-        <input name="email" type="email"/>
-      </div>
-      <div>
-        <label>Password</label>
-        <input name="password" type="password" />
-      </div>
-      <button>Submit</button>
-    </form>
-  
-  `);
-});
-
 router.post('/login', (request: RequestWithBody, response: Response): void => {
 	const { email, password } = request.body;
 	if (
@@ -77,7 +60,7 @@ router.get('/logout', (request: Request, response: Response): void => {
 router.get(
 	'/protected',
 	requireAuth,
-	(request: Request, response: Response) => {
+	(_request: Request, response: Response) => {
 		response.send(`
     <div>Welcome to protected</div>
   `);
