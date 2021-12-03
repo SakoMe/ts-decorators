@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import { AppRouter } from '../../AppRouter';
 import { Methods } from './Methods';
 import { MetadataKeys } from './MetadataKeys';
+import { RequestHandler } from 'express';
 
 export function controller(routePrefix: string): Function {
 	return function (target: Function) {
@@ -23,7 +24,12 @@ export function controller(routePrefix: string): Function {
 				key
 			);
 
-			if (path) router[method](`${routePrefix}${path}`, routeHandler);
+			const middlewares: RequestHandler[] =
+				Reflect.getMetadata(MetadataKeys.Middleware, target.prototype, key) ||
+				[];
+
+			if (path)
+				router[method](`${routePrefix}${path}`, ...middlewares, routeHandler);
 		}
 	};
 }

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { get, controller } from './decorators';
 
 @controller('/auth')
-class LoginController {
+export class LoginController {
 	@get('/login')
 	getLogin(_request: Request, response: Response): void {
 		response.send(`

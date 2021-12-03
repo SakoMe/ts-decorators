@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoginController = void 0;
 const decorators_1 = require("./decorators");
 let LoginController = class LoginController {
     getLogin(_request, response) {
@@ -37,3 +38,4 @@ __decorate([
 LoginController = __decorate([
     (0, decorators_1.controller)('/auth')
 ], LoginController);
+exports.LoginController = LoginController;
