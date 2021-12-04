@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { get, controller } from './decorators';
+import { get, controller, post, bodyValidator } from './decorators';
 
 @controller('/auth')
 export class LoginController {
@@ -20,5 +20,23 @@ export class LoginController {
     </form>
   
   `);
+	}
+
+	@post('/login')
+	@bodyValidator('email', 'password')
+	postLogin(request: Request, response: Response): void {
+		const { email, password } = request.body;
+		if (email === 'bob@mail.com' && password === 'password') {
+			request.session = { loggedIn: true };
+			response.redirect('/');
+		} else {
+			response.status(400).send('Email or Password are incorrect');
+		}
+	}
+
+	@get('/logout')
+	logout(request: Request, response: Response): void {
+		request.session = undefined;
+		response.redirect('/');
 	}
 }

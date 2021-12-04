@@ -28,6 +28,20 @@ let LoginController = class LoginController {
   
   `);
     }
+    postLogin(request, response) {
+        const { email, password } = request.body;
+        if (email === 'bob@mail.com' && password === 'password') {
+            request.session = { loggedIn: true };
+            response.redirect('/');
+        }
+        else {
+            response.status(400).send('Email or Password are incorrect');
+        }
+    }
+    logout(request, response) {
+        request.session = undefined;
+        response.redirect('/');
+    }
 };
 __decorate([
     (0, decorators_1.get)('/login'),
@@ -35,6 +49,19 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "getLogin", null);
+__decorate([
+    (0, decorators_1.post)('/login'),
+    (0, decorators_1.bodyValidator)('email', 'password'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "postLogin", null);
+__decorate([
+    (0, decorators_1.get)('/logout'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "logout", null);
 LoginController = __decorate([
     (0, decorators_1.controller)('/auth')
 ], LoginController);
