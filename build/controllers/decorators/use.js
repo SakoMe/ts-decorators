@@ -4,7 +4,7 @@ exports.use = void 0;
 require("reflect-metadata");
 const MetadataKeys_1 = require("./MetadataKeys");
 function use(middleware) {
-    return function (target, key, desc) {
+    return function (target, key) {
         const middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.Middleware, target, key) || [];
         Reflect.defineMetadata(MetadataKeys_1.MetadataKeys.Middleware, [...middlewares, middleware], target, key);
     };
